@@ -27,7 +27,7 @@ prob1_df =
 
 Take the mean of each variable in my data frame.
 
-```{r}
+```{r mean_pull_var}
 mean(pull(prob1_df, samp))
 mean(pull(prob1_df, samp_gt_0))
 mean(pull(prob1_df, char_vec))
@@ -36,13 +36,23 @@ mean(pull(prob1_df, factor_vec))
 
 I can take the mean of numbers and logical but not character and factor.
 
-```{r}
+```{r try_numeric}
 as.numeric(pull(prob1_df, samp))
 as.numeric(pull(prob1_df, samp_gt_0))
 as.numeric(pull(prob1_df, char_vec))
 as.numeric(pull(prob1_df, factor_vec))
 ```
 
+"as.numeric" works for the random sample and logical vector but not character and factor, which explains why I cannot take the mean for them.
 
+```{r try_convert the logical vector and multiply the random sample by the result}
+as.numeric(pull(prob1_df, samp_gt_0)) * pull(prob1_df,samp)
+as.factor(pull(prob1_df, samp_gt_0)) 
+as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df,samp)
+as.numeric(as.factor(pull(prob1_df, samp_gt_0))) 
+as.numeric(as.factor(pull(prob1_df, samp_gt_0))) * pull(prob1_df,samp)
+```
+
+I can multiply the random sample by the result to the logical vector which is converted to numeric but not to factor. But if I convert the logical vector to a factor and then convert the result to numeric, I can multiply the random sample by the result.
 
 ## Problem 2
