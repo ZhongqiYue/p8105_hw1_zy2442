@@ -56,3 +56,25 @@ as.numeric(as.factor(pull(prob1_df, samp_gt_0))) * pull(prob1_df,samp)
 I can multiply the random sample by the result to the logical vector which is converted to numeric but not to factor. But if I convert the logical vector to a factor and then convert the result to numeric, I can multiply the random sample by the result.
 
 ## Problem 2
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+
+#### The short description of the data set
+```{r dataset_size}
+prob2_df = (force(penguins))
+as.numeric(pull(prob2_df, species))
+as.numeric(pull(prob2_df, island))
+nrow(prob2_df)
+ncol(prob2_df)
+mean(pull(prob2_df, flipper_length_mm), na.rm = TRUE)
+```
+
+This data set has 344 observations and 8 variables which are species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex and year. For species, it has 152 Adelie, 52 of which are on Torgersen island, 44 of which are on Biscoe island, 56 of which are on Dream island; 124 Gentoo, all of which are on Biscoe island; and 68 Chinstrap, all of which are on Dream island. The data set has 334 rows and 8 columns. Additionally, the mean flipper length is 200.9152 mm.
+
+#### The scatterplot of flipper_length_mm (y) vs bill_length_mm (x)
+```{r prob2_plot}
+ggplot(prob2_df, aes(y = flipper_length_mm, x = bill_length_mm, color = species)) + geom_point()
+ggsave("scatter_plot.pdf", height = 4, width = 4)
+```
+
